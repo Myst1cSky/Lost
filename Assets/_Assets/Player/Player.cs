@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(MovementController))]
@@ -7,6 +8,7 @@ public class Player : MonoBehaviour
 
     private PlayerInputActions mPlayerInputActions;
     private MovementController mMovementController;
+    private BattleState mBattleState;
 
     CameraRig mCameraRig;
     void Awake()
@@ -40,5 +42,23 @@ public class Player : MonoBehaviour
     void Update()
     {
         
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject == gameObject)
+        {
+            return;
+        }
+
+        BattlePartyComponent otherBattlePartyComponent = other.GetComponent<BattlePartyComponent>();
+        if (otherBattlePartyComponent && !IsInBattle())
+        {
+            GameMode.MainGameMode.mBattleManager.StartBattle(mBattlePartyComponent, otherBattlePartyComponent);
+        }
+    }
+
+    private bool IsInBattle()
+    {
+        return mBattleState == BattleState.InBattle;
     }
 }
