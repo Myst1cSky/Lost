@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
         {
             if (Target == value)
                 return;
-
+            mTarget = value;
             if (value == null)
             {
                 mBehaviorGraphAgent.BlackboardReference.SetVariableValue("HasLastSeenPosition", true);
@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour
 
     private void UpdatePlayerPerception()
     {
-        Debug.Log($"Checking Percption");
+        //Debug.Log($"Checking Percption");
         Player player = GameMode.MainGameMode.mPlayer;
         if (!player)
         {

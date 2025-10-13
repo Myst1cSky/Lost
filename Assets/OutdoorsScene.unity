@@ -821,25 +821,72 @@ PrefabInstance:
       value: Chomper
       objectReference: {fileID: 0}
     - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: 'managedReferences[5412796942379123017]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject,
+        UnityEngine.CoreModule]], mscorlib]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
       propertyPath: 'managedReferences[5412796987641168267]'
       value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Single,
         mscorlib]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: 'managedReferences[5412797100976504901]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[UnityEngine.GameObject,
+        UnityEngine.CoreModule]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: 'managedReferences[5412797100976504904]'
+      value: 'Unity.Behavior Unity.Behavior.BlackboardVariable`1[[System.Collections.Generic.List`1[[UnityEngine.GameObject,
+        UnityEngine.CoreModule]], mscorlib]]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412796942379123017].Name
+      value: 
       objectReference: {fileID: 0}
     - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
       propertyPath: managedReferences[5412796987641168267].Name
       value: MoveSpeed
       objectReference: {fileID: 0}
     - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412797100976504901].Name
+      value: Target
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412797100976504904].Name
+      value: PatrolWayPoints
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
       propertyPath: m_BlackboardVariableOverridesList.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
       propertyPath: managedReferences[5412796987641168267].m_Value
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412797100976504901].m_Value
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[1]'
+      value: 5412797100976504904
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
       propertyPath: 'm_BlackboardVariableOverridesList.Array.data[2]'
       value: 5412796987641168267
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: 'm_BlackboardVariableOverridesList.Array.data[3]'
+      value: 5412797100976504901
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412796942379123017].GUID.m_Value0
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412796942379123017].GUID.m_Value1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
       propertyPath: managedReferences[5412796987641168267].GUID.m_Value0
@@ -848,6 +895,30 @@ PrefabInstance:
     - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
       propertyPath: managedReferences[5412796987641168267].GUID.m_Value1
       value: 17889442048957959793
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412797100976504901].GUID.m_Value0
+      value: 5275668906497820649
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412797100976504901].GUID.m_Value1
+      value: 15391059010160606100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412797100976504904].GUID.m_Value0
+      value: 8764006473301117829
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412797100976504904].GUID.m_Value1
+      value: 13265543557609645868
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412796942379123017].m_Value.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: managedReferences[5412797100976504904].m_Value.Array.size
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
       propertyPath: 'managedReferences[5412796942379123017].m_Value.Array.data[0]'
@@ -859,6 +930,18 @@ PrefabInstance:
       objectReference: {fileID: 1844773111}
     - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
       propertyPath: 'managedReferences[5412796942379123017].m_Value.Array.data[2]'
+      value: 
+      objectReference: {fileID: 47285732}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: 'managedReferences[5412797100976504904].m_Value.Array.data[0]'
+      value: 
+      objectReference: {fileID: 349631320}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: 'managedReferences[5412797100976504904].m_Value.Array.data[1]'
+      value: 
+      objectReference: {fileID: 1844773111}
+    - target: {fileID: 5923581496962890231, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
+      propertyPath: 'managedReferences[5412797100976504904].m_Value.Array.data[2]'
       value: 
       objectReference: {fileID: 47285732}
     - target: {fileID: 6986690976170260599, guid: d9a93c3928ac78a40b7ab1507e275dfe, type: 3}
