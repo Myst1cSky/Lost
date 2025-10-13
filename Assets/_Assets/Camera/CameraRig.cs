@@ -38,4 +38,10 @@ public class CameraRig : MonoBehaviour
         mPitchTransform.localEulerAngles = new Vector3(mPitch, 0f , 0f);
 
     }
+
+    internal void ResetViewAngle()
+    {
+        mPitch = 0f;
+        mYawTransform.localRotation = Quaternion.identity;
+    }
 }
