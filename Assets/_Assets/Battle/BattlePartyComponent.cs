@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class BattlePartyComponent : MonoBehaviour
 {
-    [SerializeField] BattleCharacter[] mBattleCharactersPrefabs;
-    List<BattleCharacter> mBattleCharacters;
+    [SerializeField] BattleCharacters[] mBattleCharactersPrefabs;
+    List<BattleCharacters> mBattleCharacters;
 
     IViewClient mOwnerViewClient;
 
@@ -16,19 +16,24 @@ public class BattlePartyComponent : MonoBehaviour
 
     public void FinishPrep()
     {
+       
+    }
+
+    public void UpdateView()
+    {
         if (mOwnerViewClient is not null)
         {
             mOwnerViewClient.SetViewTarget(mBattleCharacters[0].transform);
             mOwnerViewClient.ResetViewAngle();
         }
-    }
+    }    
 
-    public List<BattleCharacter> GetBattleCharacters()
+    public List<BattleCharacters> GetBattleCharacters()
     {
         if (mBattleCharacters == null)
         {
-            mBattleCharacters = new List<BattleCharacter>();
-            foreach (BattleCharacter battleCharacter in mBattleCharactersPrefabs)
+            mBattleCharacters = new List<BattleCharacters>();
+            foreach (BattleCharacters battleCharacter in mBattleCharactersPrefabs)
             {
                 mBattleCharacters.Add(Instantiate(battleCharacter));
             }
