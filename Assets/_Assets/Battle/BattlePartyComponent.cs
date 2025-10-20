@@ -1,4 +1,4 @@
-using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +8,8 @@ public class BattlePartyComponent : MonoBehaviour
     List<BattleCharacters> mBattleCharacters;
 
     IViewClient mOwnerViewClient;
+
+    public event Action<BattleCharacters> onBattleCharacterTakeTurn;
 
     void Awake()
     {
@@ -36,7 +38,7 @@ public class BattlePartyComponent : MonoBehaviour
             foreach (BattleCharacters battleCharacter in mBattleCharactersPrefabs)
             {
                 BattleCharacters newBattleCharacter = Instantiate(battleCharacter);
-                newBattleCharacter.onTurnStarted += ChangeViewTo;
+                newBattleCharacter.onTurnStarted += CharacterInTurn;
                 mBattleCharacters.Add((newBattleCharacter));
             }
         }
@@ -44,8 +46,9 @@ public class BattlePartyComponent : MonoBehaviour
         return mBattleCharacters;
     }
 
-    private void ChangeViewTo(BattleCharacters character)
+    private void CharacterInTurn(BattleCharacters character)
     {
+        onBattleCharacterTakeTurn?.Invoke(character);
         if (mOwnerViewClient is not null && character)
         {
             mOwnerViewClient.SetViewTarget(character.transform);
