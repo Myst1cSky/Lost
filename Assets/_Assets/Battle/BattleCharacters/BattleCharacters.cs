@@ -11,6 +11,8 @@ public class BattleCharacters : MonoBehaviour
 
     public event Action OnTurnFinished;
 
+    public event Action<BattleCharacters> onTurnStarted;
+
     void Awake()
     {
         CooldownTimeRemaining = CooldownDuration;
@@ -21,6 +23,7 @@ public class BattleCharacters : MonoBehaviour
     {
         Invoke("FinishTurn", 1);
         mTurnIndicator.SetActive(true);
+        onTurnStarted?.Invoke(this);
         CooldownTimeRemaining = CooldownDuration;
     }
 

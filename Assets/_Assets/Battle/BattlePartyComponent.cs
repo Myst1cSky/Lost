@@ -35,10 +35,20 @@ public class BattlePartyComponent : MonoBehaviour
             mBattleCharacters = new List<BattleCharacters>();
             foreach (BattleCharacters battleCharacter in mBattleCharactersPrefabs)
             {
-                mBattleCharacters.Add(Instantiate(battleCharacter));
+                BattleCharacters newBattleCharacter = Instantiate(battleCharacter);
+                newBattleCharacter.onTurnStarted += ChangeViewTo;
+                mBattleCharacters.Add((newBattleCharacter));
             }
         }
 
         return mBattleCharacters;
+    }
+
+    private void ChangeViewTo(BattleCharacters character)
+    {
+        if (mOwnerViewClient is not null && character)
+        {
+            mOwnerViewClient.SetViewTarget(character.transform);
+        }
     }
 }
