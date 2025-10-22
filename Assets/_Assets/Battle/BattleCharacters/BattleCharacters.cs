@@ -26,6 +26,7 @@ public class BattleCharacters : MonoBehaviour
     {
         CooldownTimeRemaining = CooldownDuration;
         mTurnIndicator.SetActive(false);
+        mAbilityComponent = GetComponent<AbilityComponent>();
     }
 
     public void TakeTurn()
