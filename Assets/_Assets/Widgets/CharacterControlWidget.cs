@@ -8,6 +8,6 @@ public class CharacterControlWidget : MonoBehaviour
     internal void SetBattleCharacter(BattleCharacters battleCharacter)
     {
         Debug.Log($"Setting Battle Character name to: {battleCharacter.gameObject.name}");
-        mCharacterNameText.SetText(battleCharacter.gameObject.name);
+        mCharacterNameText.SetText(battleCharacter.Name);
     }
 }
