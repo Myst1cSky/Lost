@@ -1,17 +1,18 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Abilities/BasicAttack")]
 public class BasicAttack : Ability
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    public override void ActivateAbility()
     {
-        
-    }
+        base.ActivateAbility();
+        int partyId = OwningAbilityComponent.GetPartyID();
+        List<BattleCharacters> targets = GameMode.MainGameMode.mBattleManager.GetTargetsForTeam(partyId, true);
+        foreach (BattleCharacters battleCharacter in targets)
+        {
+            Debug.Log($"Found Target: {battleCharacter.gameObject.name}");
+        }    
 
-    // Update is called once per frame
-    void Update()
-    {
-        
     }
 }

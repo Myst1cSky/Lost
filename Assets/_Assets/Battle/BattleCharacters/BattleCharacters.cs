@@ -17,6 +17,13 @@ public class BattleCharacters : MonoBehaviour
 
     AbilityComponent mAbilityComponent;
 
+    public int PartyID { get; private set; }
+
+    public void Init(int partyID)
+    {
+        PartyID = partyID;
+    }
+
     public AbilityComponent GetAbilityComponent()
     {
         return mAbilityComponent;

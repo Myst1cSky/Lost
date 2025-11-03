@@ -11,6 +11,8 @@ public class BattlePartyComponent : MonoBehaviour
 
     public event Action<BattleCharacters> onBattleCharacterTakeTurn;
 
+    [field: SerializeField] public int PartyID { get; private set; } = 0;
+
     void Awake()
     {
         mOwnerViewClient = GetComponent<IViewClient>();
@@ -38,6 +40,7 @@ public class BattlePartyComponent : MonoBehaviour
             foreach (BattleCharacters battleCharacter in mBattleCharactersPrefabs)
             {
                 BattleCharacters newBattleCharacter = Instantiate(battleCharacter);
+                newBattleCharacter.Init(PartyID);
                 newBattleCharacter.onTurnStarted += CharacterInTurn;
                 mBattleCharacters.Add((newBattleCharacter));
             }

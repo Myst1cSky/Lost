@@ -3,12 +3,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattleManager : MonoBehaviour
+[RequireComponent(typeof(TargetingComponent))]
+
+public class BattleManager : MonoBehaviour, ITargetService
 {
     List<BattleSite> mBattleSites;
     List<BattleCharacters> mBattleCharacters = new List<BattleCharacters>();
 
     Queue<BattleCharacters> mFirstRoundBattleCharacters = new Queue<BattleCharacters>();
+
+    TargetingComponent mTargetingComponent;
     //int mRoundNumber = 1;
     //int mFirstTurnNextIndex = 0;    
    public void StartBattle(BattlePartyComponent playerParty, BattlePartyComponent enemyParty)
@@ -117,5 +121,27 @@ public class BattleManager : MonoBehaviour
         }
 
         party.FinishPrep();
+    }
+
+    public List<BattleCharacters> GetTargetsForTeam(int teamID, bool hostileTargets)
+    {
+        List<BattleCharacters> targets = new List<BattleCharacters>();
+        foreach(BattleCharacters battleCharacter in mBattleCharacters)
+        {
+            if (battleCharacter.PartyID == teamID && !hostileTargets)
+            {
+                targets.Add(battleCharacter);
+            }
+            if (battleCharacter.PartyID != teamID && hostileTargets)
+            {
+                targets.Add(battleCharacter);
+            }
+        }
+        return targets;
+    }
+
+    public TargetingComponent GetTargetingComponent()
+    {
+        return mTargetingComponent;
     }
 }
