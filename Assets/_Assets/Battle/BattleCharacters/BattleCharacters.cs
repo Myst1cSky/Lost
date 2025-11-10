@@ -36,10 +36,14 @@ public class BattleCharacters : MonoBehaviour
         mAbilityComponent = GetComponent<AbilityComponent>();
     }
 
+    public void SetHighLighted(bool highted)
+    {
+        mTurnIndicator.SetActive(highted);
+    }
+
     public void TakeTurn()
     {
-        //Invoke("FinishTurn", 1);
-        mTurnIndicator.SetActive(true);
+        SetHighLighted(true);
         onTurnStarted?.Invoke(this);
         CooldownTimeRemaining = CooldownDuration;
     }

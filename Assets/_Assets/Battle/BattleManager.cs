@@ -14,9 +14,16 @@ public class BattleManager : MonoBehaviour, ITargetService
 
     TargetingComponent mTargetingComponent;
     //int mRoundNumber = 1;
-    //int mFirstTurnNextIndex = 0;    
+    //int mFirstTurnNextIndex = 0;
+    
+   void Awake()
+   {
+       mTargetingComponent = GetComponent<TargetingComponent>();
+       mTargetingComponent.SetTargetService(this);
+   }
+
    public void StartBattle(BattlePartyComponent playerParty, BattlePartyComponent enemyParty)
-    {
+   {
         mBattleCharacters.Clear();
         if (mBattleSites == null)
         {
@@ -27,7 +34,7 @@ public class BattleManager : MonoBehaviour, ITargetService
         PrepParty(playerParty);
         PrepParty(enemyParty);
         StartCoroutine(StartTurns());
-    }
+   }
 
     IEnumerator StartTurns()
     {
