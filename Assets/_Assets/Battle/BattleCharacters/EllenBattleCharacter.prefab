@@ -127,6 +127,18 @@ PrefabInstance:
       propertyPath: 'mInitialAbilities.Array.data[1]'
       value: 
       objectReference: {fileID: 11400000, guid: d10d10cd2d118e3489a8c313969e6ed6, type: 2}
+    - target: {fileID: 4943434611042414201, guid: 61df3f77169efc64399881da17d95522, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943434611042414201, guid: 61df3f77169efc64399881da17d95522, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.77
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943434611042414201, guid: 61df3f77169efc64399881da17d95522, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.25
+      objectReference: {fileID: 0}
     - target: {fileID: 8210751856795770814, guid: 61df3f77169efc64399881da17d95522, type: 3}
       propertyPath: m_Name
       value: EllenBattleCharacter

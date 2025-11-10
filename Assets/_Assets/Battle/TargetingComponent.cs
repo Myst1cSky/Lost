@@ -21,7 +21,7 @@ public class TargetingComponent : MonoBehaviour
         mTargetService = targetService;
     }
 
-    public void StartTargetting(int PartyId, bool hostile)
+    public void StartTargeting(int PartyId, bool hostile)
     {
         mBattleInputActions.Enable();
         mTargets.Clear();
