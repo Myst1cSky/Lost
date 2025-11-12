@@ -60,4 +60,10 @@ public class BasicAttack : Ability
             OwningAbilityComponent.MoveBackToPartySpot();
         }
     }
+
+    private void MoveBack()
+    {
+        OwningAbilityComponent.onMoveBackToPartySpotFinished -= MoveBack;
+        EndAbility();
+    }
 }
