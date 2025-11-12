@@ -86,4 +86,9 @@ public class BattleCharacters : MonoBehaviour
     {
         mNavMeshAgent.Warp(position);
     }
+
+    internal void TakeDamage(float mDamageAmt)
+    {
+        Debug.Log($"{gameObject.name} Taking damage: {mDamageAmt}");
+    }
 }

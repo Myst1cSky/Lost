@@ -5,6 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Abilities/BasicAttack")]
 public class BasicAttack : Ability
 {
+    BattleCharacters mTarget;
+    [SerializeField] float mDamageAmt = 20f;
     public override void ActivateAbility()
     {
         base.ActivateAbility();
@@ -26,11 +28,36 @@ public class BasicAttack : Ability
 
     private void TargetPicked(BattleCharacters characters)
     {
+        mTarget = characters;
         OwningAbilityComponent.onTargetPicked -= TargetPicked;
         OwningAbilityComponent.onTargetCancelled -= TargetCancelled;
 
-        Debug.Log($"attacking: {characters.gameObject.name}");
+        Debug.Log($"Attacking: {characters.gameObject.name}");
 
         OwningAbilityComponent.MoveToTarget(characters.transform.position);
+
+        OwningAbilityComponent.onMoveToTargetFinished -= MovedToTarget;
+        OwningAbilityComponent.onMoveToTargetFinished += MovedToTarget;
+    }
+
+    private void MovedToTarget()
+    {
+        OwningAbilityComponent.onMoveToTargetFinished -= MovedToTarget;
+        OwningAbilityComponent.GetComponent<Animator>().SetTrigger("Attack");
+        OwningAbilityComponent.onGameplayEventReceived += HandleGameplayEvent;
+    }
+
+    private void HandleGameplayEvent(string eventTag)
+    {
+        if (eventTag == "ApplyDamage")
+        {
+            mTarget.TakeDamage(mDamageAmt);
+            return;
+        }
+
+        if (eventTag == "AttackFinished")
+        {
+            OwningAbilityComponent.MoveBackToPartySpot();
+        }
     }
 }

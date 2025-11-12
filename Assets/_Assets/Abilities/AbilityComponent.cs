@@ -15,6 +15,11 @@ public class AbilityComponent : MonoBehaviour
     public event Action onTargetCancelled;
     public event Action<BattleCharacters> onTargetPicked;
 
+    public event Action onMoveToTargetFinished;
+    public event Action onMoveToPartyPos;
+
+    public event Action<string> onGameplayEventReceived;
+
     NavMeshAgent mNavMeshAgent;
 
     bool mHasReachedDestination = true;
@@ -128,7 +133,18 @@ public class AbilityComponent : MonoBehaviour
         if (!mNavMeshAgent.hasPath || mNavMeshAgent.velocity.sqrMagnitude == 0f)
         {
             mHasReachedDestination = true;
-            Debug.Log($"Finished Move");
+            onMoveToTargetFinished?.Invoke();
         }
+    }
+
+    public void HandleGameplayEvent(string eventTag)
+    {
+        Debug.Log($"handling event with tag: {eventTag}");
+        onGameplayEventReceived?.Invoke(eventTag);
+    }
+
+    internal void MoveBackToPartySpot()
+    {
+        Debug.Log($"Moving back!");
     }
 }
