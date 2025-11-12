@@ -119,6 +119,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5252222781802968344, guid: 61df3f77169efc64399881da17d95522, type: 3}
+      propertyPath: m_Avatar
+      value: 
+      objectReference: {fileID: 9000000, guid: 2732fe64dd2799f439fb845921df626b, type: 3}
+    - target: {fileID: 5252222781802968344, guid: 61df3f77169efc64399881da17d95522, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2006ea34547dc8a48a07792cd6b71461, type: 2}
     - target: {fileID: 8210751856795770814, guid: 61df3f77169efc64399881da17d95522, type: 3}
       propertyPath: m_Name
       value: ChomperBattleCharacter

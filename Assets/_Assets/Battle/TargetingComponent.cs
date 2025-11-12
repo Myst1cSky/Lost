@@ -1,4 +1,6 @@
+using System;
 using System.Collections.Generic;
+using Unity.AppUI.UI;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -15,6 +17,9 @@ public class TargetingComponent : MonoBehaviour
     bool mNavigationReset = true;
 
     int mCurrentlySelectedTargetIndex = -1;
+
+    public event Action <BattleCharacters> onTargetPicked;
+    public event Action onTargetCancelled;
 
     public void SetTargetService(ITargetService targetService)
     {
@@ -34,7 +39,49 @@ public class TargetingComponent : MonoBehaviour
         mBattleInputActions = new BattleInputActions();
         mBattleInputActions.Battle.Navigation.performed += HandleTargetNavigation;
         mBattleInputActions.Battle.Navigation.canceled += HandleTargetNavigation;
+        mBattleInputActions.Battle.Cancel.performed += CancelTargeting;
+        mBattleInputActions.Battle.Confirm.performed += ConfirmTarget;
         mBattleInputActions.Disable();
+    }
+
+    private void ConfirmTarget(InputAction.CallbackContext context)
+    {
+        mBattleInputActions.Disable();
+        BattleCharacters battleCharacters = GetCurrentlySelectedTarget();
+        if (battleCharacters)
+        {
+            battleCharacters.SetHighLighted(false);
+        }
+        onTargetPicked?.Invoke(battleCharacters);
+    }
+
+    private void StartTargeting(bool hostile)
+    {
+        mBattleInputActions.Enable();
+
+        mTargets.Clear();
+        TargetingComponent targetingComponent = GameMode.MainGameMode.mBattleManager.GetTargetingComponent();
+        onTargetCancelled?.Invoke();
+    }
+
+    private void CancelTargeting(InputAction.CallbackContext context)
+    {
+        mBattleInputActions.Disable();
+        BattleCharacters battleCharacter = GetCurrentlySelectedTarget();
+        if (battleCharacter)
+        {
+            battleCharacter.SetHighLighted(false);
+        }
+        onTargetCancelled?.Invoke();
+    }
+
+    private BattleCharacters GetCurrentlySelectedTarget()
+    {
+        if (mCurrentlySelectedTargetIndex >= 0 && mCurrentlySelectedTargetIndex < mTargets.Count)
+        {
+            return mTargets[mCurrentlySelectedTargetIndex];
+        }
+        return null;
     }
 
     void OnEnable()

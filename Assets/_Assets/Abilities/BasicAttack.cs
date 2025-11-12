@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,5 +10,27 @@ public class BasicAttack : Ability
         base.ActivateAbility();
         OwningAbilityComponent.StartTargeting(true);
 
+        OwningAbilityComponent.onTargetPicked -= TargetPicked;
+        OwningAbilityComponent.onTargetCancelled -= TargetCancelled;
+
+        OwningAbilityComponent.onTargetPicked += TargetPicked;
+        OwningAbilityComponent.onTargetCancelled += TargetCancelled;
+    }
+
+    private void TargetCancelled()
+    {
+        OwningAbilityComponent.onTargetPicked -= TargetPicked;
+        OwningAbilityComponent.onTargetCancelled -= TargetCancelled;
+        EndAbility();
+    }
+
+    private void TargetPicked(BattleCharacters characters)
+    {
+        OwningAbilityComponent.onTargetPicked -= TargetPicked;
+        OwningAbilityComponent.onTargetCancelled -= TargetCancelled;
+
+        Debug.Log($"attacking: {characters.gameObject.name}");
+
+        OwningAbilityComponent.MoveToTarget(characters.transform.position);
     }
 }

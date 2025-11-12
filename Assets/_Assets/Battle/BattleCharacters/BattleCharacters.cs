@@ -1,7 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.AI;
 
 [RequireComponent(typeof(AbilityComponent))]
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(Animator))]
 public class BattleCharacters : MonoBehaviour
 {
     [field: SerializeField] public float Speed { get; private set; } = 1;
@@ -16,6 +19,10 @@ public class BattleCharacters : MonoBehaviour
     public event Action<BattleCharacters> onTurnStarted;
 
     AbilityComponent mAbilityComponent;
+
+    NavMeshAgent mNavMeshAgent;
+
+    Animator mAnimator;
 
     public int PartyID { get; private set; }
 
@@ -43,6 +50,13 @@ public class BattleCharacters : MonoBehaviour
         CooldownTimeRemaining = CooldownDuration;
         mTurnIndicator.SetActive(false);
         mAbilityComponent = GetComponent<AbilityComponent>();
+        mNavMeshAgent = GetComponent<NavMeshAgent>();
+        mAnimator = GetComponent<Animator>();
+    }
+
+    void Update()
+    {
+        mAnimator.SetFloat("Speed", mNavMeshAgent.velocity.magnitude);
     }
 
     public void SetHighLighted(bool highted)
@@ -66,5 +80,10 @@ public class BattleCharacters : MonoBehaviour
     internal void AdvanceCooldown(float advanceTime)
     {
         CooldownTimeRemaining -= advanceTime;
+    }
+
+    internal void WarpNavPositionTo(Vector3 position)
+    {
+        mNavMeshAgent.Warp(position);
     }
 }

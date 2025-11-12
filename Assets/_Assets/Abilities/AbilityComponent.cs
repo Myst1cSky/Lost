@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.TextCore.Text;
 
 public class AbilityComponent : MonoBehaviour
 {
@@ -9,6 +11,19 @@ public class AbilityComponent : MonoBehaviour
     List<Ability> mAbilities = new List<Ability>();
 
     IViewClient mOwnerViewClient;
+
+    public event Action onTargetCancelled;
+    public event Action<BattleCharacters> onTargetPicked;
+
+    NavMeshAgent mNavMeshAgent;
+
+    bool mHasReachedDestination = true;
+
+    void Awake()
+    {
+        mNavMeshAgent = GetComponent<NavMeshAgent>();
+    }
+
     public int GetPartyID()
     {
         return GetComponent<BattleCharacters>().PartyID;
@@ -28,7 +43,44 @@ public class AbilityComponent : MonoBehaviour
         {
             mOwnerViewClient.PushViewTarget(mTargetingFollowTransform);
         }
-        GameMode.MainGameMode.mBattleManager.GetTargetingComponent().StartTargeting(GetPartyID(), hostile);
+        TargetingComponent targetingComponent = GameMode.MainGameMode.mBattleManager.GetTargetingComponent();
+        SubscribeToTargetingDelegates();
+        targetingComponent.StartTargeting(GetPartyID(), hostile);
+    }
+
+    void SubscribeToTargetingDelegates()
+    {
+        UnSubscribeToTargetingDelegates();
+        GameMode.MainGameMode.mBattleManager.GetTargetingComponent().onTargetCancelled += CancelTargeting;
+        GameMode.MainGameMode.mBattleManager.GetTargetingComponent().onTargetPicked += TargetPicked;
+    }
+
+    void UnSubscribeToTargetingDelegates()
+    {
+        GameMode.MainGameMode.mBattleManager.GetTargetingComponent().onTargetCancelled -= CancelTargeting;
+        GameMode.MainGameMode.mBattleManager.GetTargetingComponent().onTargetPicked -= TargetPicked;
+    }
+
+    private void TargetPicked(BattleCharacters characters)
+    {
+        UnSubscribeToTargetingDelegates();
+        if (mOwnerViewClient is not null)
+        {
+            mOwnerViewClient.PopViewTarget(mTargetingFollowTransform);
+        }
+
+        onTargetPicked?.Invoke(characters);
+    }
+
+    private void CancelTargeting()
+    {
+        UnSubscribeToTargetingDelegates();
+        if (mOwnerViewClient is not null)
+        {
+            mOwnerViewClient.PopViewTarget(mTargetingFollowTransform);
+        }
+
+        onTargetCancelled?.Invoke();
     }
 
     private void GiveAbility(Ability abilityDefaultObject)
@@ -46,5 +98,37 @@ public class AbilityComponent : MonoBehaviour
     internal void SetViewClient(IViewClient viewClient)
     {
         mOwnerViewClient = viewClient;
+    }
+
+    public void MoveToTarget(Vector3 targetPosition)
+    {
+        mHasReachedDestination = false;
+        mNavMeshAgent.SetDestination(targetPosition);
+    }
+
+    void Update()
+    {
+        UpdateNavigation();
+    }
+
+    private void UpdateNavigation()
+    {
+        if (mHasReachedDestination)
+        {
+            return;
+        }
+        if (mNavMeshAgent.pathPending)
+        {
+            return;
+        }
+        if (mNavMeshAgent.remainingDistance > mNavMeshAgent.stoppingDistance)
+        {
+            return;
+        }
+        if (!mNavMeshAgent.hasPath || mNavMeshAgent.velocity.sqrMagnitude == 0f)
+        {
+            mHasReachedDestination = true;
+            Debug.Log($"Finished Move");
+        }
     }
 }
